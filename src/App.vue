@@ -6,8 +6,8 @@
       <a href="#">About Us</a>
       <a href="#">Contact</a>
     </nav>
-    <Home v-if="currentPage == 'home'" @changePage="toAddCard" />
-    <AddCard v-else-if="currentPage == 'addcard'" />
+    <Home v-if="currentPage == 'home'" @changePage="toAddCard" v-bind:card="card"/>
+    <AddCard v-else-if="currentPage == 'addcard'" @send="showCard"/>
   </div>
 </template>
 
@@ -18,14 +18,31 @@ export default {
   components: {Home, AddCard},
   data(){return{
     currentPage: 'home',
-    // cards:[
-    //   {}
-    // ]
+    card:null,
+    cards: [],
+     
+    
   }},
   methods:{
     toAddCard(){
       this.currentPage = 'addcard'
+    },
+    showCard(card){
+      console.log('this is a app',card)
+      this.card = card
+      this.cards.push(this.card)
+      this.localStorage()
+    },
+    localStorage(){
+      localStorage.setItem('cards', JSON.stringify(this.cards))
     }
+  },
+  beforeMount(){
+    const cards = localStorage.getItem('cards')
+    if(cards ){
+      this.cards = JSON.parse(cards)
+      console.log('this is saved cards', this.cards)
+    } 
   }
 
 

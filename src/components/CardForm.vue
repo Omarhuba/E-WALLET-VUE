@@ -1,38 +1,40 @@
 <template>
   <div>
      <SingleCard :card="card"
-                  @send="register"/>
+                  @send="register"
+                  
+                  />
      <br>
      <br>
 
 
 <form action="user-form" @submit.prevent="addCard">
   <label for="card-number">CARD NUMBER</label>
-  <input type="text" name="user-name" 
-         placeholder="Type your card number here"
+  <input type="number" name="user-name" 
+         placeholder="TYPE YOUR CARDNUMBER HERE"
          v-model="card.cardNumber"
          >
   <br>
   <label for="card-name">CARDHOLDER NAME</label>
-  <input type="text" name="user-name" placeholder="Type your name here"
+  <input type="text" name="user-name" placeholder="TYPE YOUR NAME HERE"
          v-model="card.cardholderName"
          >
   <br>
   <div class="valid-ccv">
     <span class="valid">
       <label for="input">VALID THRU</label>
-      <input type="text" placeholder="yyyy/mm"
+      <input type="text" placeholder="YYYY/MM"
               v-model="card.valid"   >
     </span>
     <span class="ccv">
       <label for="input">CCV</label>
-      <input type="text" placeholder="ccv" v-model="card.ccv" >
+      <input type="text" placeholder="CCV" v-model="card.ccv" >
     </span>
   </div>
 <br>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
-    <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor">
+    <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor"  :value="vendor" v-bind:vendors="vendors">
       {{vendor.name}}
     </option>
   </select>
@@ -60,22 +62,22 @@ export default {
     },
     vendors: [{
       name: 'BITCOIN CARD',
-      color: 'yellow',
+      color: '#FFAE34',
       logo: require('../assets/bitcoin.svg')
     },
     {
       name: 'BLOCKCHAIN CARD',
-      color: 'purple',
+      color: '#8B58F9',
       logo: require('../assets/blockchain.svg')
     },
    {
       name: 'NINJA CARD',
-      color: 'black',
+      color: '#222222',
       logo: require('../assets/ninja.svg')
     },
    {
       name: 'EVIL CARD',
-      color: 'red',
+      color: '#F33355',
       logo: require('../assets/evil.svg')
     },
    
@@ -83,14 +85,16 @@ export default {
   }},
   methods: {
     addCard(){
-      console.log('asdasd')
+      console.log('add to card.....',this.card)
+      this.$emit('send',{...this.card})
     },
     register(formData){
       console.log(formData)
     },
-    submit(){
-      this.$emit('send',{...this.card})
-    }
+    // submit(){
+    //   console.log(this.card)
+    //   this.$emit('send',{...this.card})
+    // }
   }
 }
 </script>

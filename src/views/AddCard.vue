@@ -6,20 +6,16 @@
       </header>
       <main>
           <div class="top">
-
           </div>
           <br>
           <br>
           <div class="middle">
-
-      <CardForm/>
+           <CardForm  @send="send" />
           </div>
-
       </main>
       <br>
       <br>
       <footer>
-       
       </footer>
   </div>
 </template>
@@ -33,6 +29,15 @@ export default {
     data(){return{
 
     }},
+    methods: {
+        addCard(send){
+      console.log(send)
+    },
+    send(card){
+        console.log('this is add card component',card) 
+         this.$emit('send',{...card})
+    }
+    }
 
 
 
@@ -50,10 +55,6 @@ header{
         text-align: center;
         margin: auto;
     }
-.addcard{
-    // width: 600px;
-    // height: 1000px;
-    // background-color: yellowgreen;
-}
+
 }    
 </style>

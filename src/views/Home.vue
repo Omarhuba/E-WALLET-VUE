@@ -6,8 +6,8 @@
     </header>
     <main>
         <div class="top-section">
-
-          <ActivCard />
+          
+          <SingleCard v-if="card" v-bind:card="card"  />
         </div>
         <div class="middle-section">
             <CardList/> 
@@ -20,11 +20,12 @@
 </template>
 
 <script>
-import ActivCard from "../components/ActivCard.vue";
+import SingleCard from "../components/SingleCard.vue";
 import CardList from "../components/CardList.vue";
 export default {
   name: "Home",
-  components: { ActivCard , CardList},
+  components: { SingleCard , CardList},
+  props: ['card'],
   data(){return{
 
   }},
