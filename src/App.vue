@@ -72,7 +72,7 @@ export default {
 }
 #app{
     width: 450px;
-    height: 900px;
+    height: 950px;
     background-color: yellowgreen;
     display: flex;
     flex-direction: column;

@@ -2,13 +2,14 @@
   <div @click="$emit('clicked')">
     <article class="activ-card" 
              :card="card"
-             v-bind:style="{backgroundColor: card.vendor.color }">
+             :vendors="vendors"
+             v-bind:style="cardStyle">
       <div class="top">
-        <img class="wifi" src="../assets/wifi.svg" alt="" />
-        <img class="bitcoin" :src="card.vendor.logo"  />
+        <img class="wifilogo" :src="wifiLogo" />
+        <img class="bitcoin" :src="logo"  />
       </div>
       <img class="chip" src="../assets/chip.svg" alt="" />
-      <div class="middle">
+      <div class="middle" >
         <!-- <p class="card-number">{{card.cardNumber}}</p> -->
         <span>{{ num1 }}</span>
         <span>{{ num2 }}</span>
@@ -36,13 +37,19 @@
 
 <script>
 export default {
-  props: ["card"],
+  props: ["card","vendors"],
   data() {return {
+    vendorLogo: require('../assets/bitcoin.svg'),
+    wifiWhite: require('../assets/wifi_white.svg'),
+    wifi: require('../assets/wifi.svg'),
 
   }},
 //   mounted(){
 //       console.log(this.card, this.vendors)
 //   },
+  methods: {
+    
+  },
   computed: {
     num1() {
       let span = "";
@@ -110,6 +117,37 @@ export default {
       }
       return p;
     },
+    cardStyle(){
+      return{
+        color: this.card.vendor.color,
+        backgroundColor: this.card.vendor.backgroundColor 
+      }
+    },
+    logo(){
+      let logo = '';
+      if(this.card.vendor.logo){
+        logo = this.card.vendor.logo;
+      }else{
+        logo = this.vendorLogo
+      }
+      return logo
+    },
+
+    wifiLogo(){
+      let wifi= '';
+      if(this.card.vendor.name == 'NINJA CARD'){
+        wifi = this.wifiWhite
+      }else{
+        wifi = this.wifi
+      }
+      return wifi
+    }
+    // bitcoin(){
+    //   let span = '';
+    //   if(this.card.vendor.name == 'BITCOIN CARD'){
+    //     span = 
+    //   }
+    // }
   },
 };
 </script>
@@ -135,6 +173,7 @@ export default {
   .middle {
     text-align: center;
     margin: 10px;
+
     span {
       padding: 10px;
       font-size: 1.5rem;
@@ -143,6 +182,7 @@ export default {
   .bottom {
     display: flex;
     justify-content: space-around;
+
     p {
       margin: 10px;
     }
@@ -153,10 +193,13 @@ export default {
   }
   .chip {
     width: 40px;
-    background-color: white;
+    background-color: #D0D0D0;
     border-radius: 5px;
     margin-left: 20px;
   }
+  // #wifiLogo{
+  //   color: white;
+  // }
   .card-number {
     font-size: 1.5rem;
     text-align: center;

@@ -1,7 +1,7 @@
 <template>
   <div>
      <SingleCard :card="card"
-               
+                 :vendors="vendors"
                   
                   />
      <br>
@@ -27,7 +27,7 @@
               v-model="card.valid"   >
     </span>
     <span class="ccv">
-      <label for="input">CCV</label>
+      <label for="input">MONTH</label>
       <input type="number" placeholder="CCV" v-model="card.ccv" >
     </span>
   </div>
@@ -64,26 +64,28 @@ export default {
     },
     vendors: [{
       name: 'BITCOIN CARD',
-      color: '#FFAE34',
+      backgroundColor: '#FFAE34',
+      color: 'black',
       logo: require('../assets/bitcoin.svg')
     },
     {
       name: 'BLOCKCHAIN CARD',
-      color: '#8B58F9',
+      backgroundColor: '#8B58F9',
+      color: 'white',
       logo: require('../assets/blockchain.svg')
     },
    {
       name: 'NINJA CARD',
-      color: '#222222',
+      backgroundColor: '#222222',
+      color: 'white',
       logo: require('../assets/ninja.svg')
     },
    {
       name: 'EVIL CARD',
-      color: '#F33355',
+      backgroundColor: '#F33355',
+      color: 'white',
       logo: require('../assets/evil.svg')
-    },
-   
-    ]
+    }]
   }},
   
   methods: {
@@ -126,6 +128,7 @@ input{
   text-align: center;
   border-radius: 10px;
   font-size: 1.1rem;
+  
 }
 .valid-ccv{
   display: flex;
@@ -159,6 +162,10 @@ input{
 }
 .submit{
   font-weight: 900;
-  color: grey;
+  color: white;
+  background-color: black;
+  width: 360px;
+  height: 60px;
+  border: none;
 }
 </style>

@@ -48,24 +48,24 @@ export default {
 <style scoped lang="scss">
  .addbtn{
     width: 350px;
-    height: 50px;
+    height: 80px;
     background-color: white;
     border-radius: 10px;
     font-family: "PT Mono", monospace;
     font-size: 1.4rem;
     font-weight: bold;
-    margin-top: 380px;
+    margin-top: 50px;
 
 }
 .full-addbtn{
   width: 350px;
-    height: 50px;
+    height: 80px;
     background-color: white;
     border-radius: 10px;
     font-family: "PT Mono", monospace;
     font-size: 1.4rem;
     font-weight: bold;
-    margin-top: 400px;               
+    margin-top: 450px;               
 }
 
 .grupp-card:nth-child(1){
@@ -83,5 +83,9 @@ export default {
 .grupp-card:nth-child(4){
   position: absolute;
   transform: translateY(75%);
+}
+.grupp-card:nth-child(5){
+  position: absolute;
+  transform: translateY(100%);
 }
 </style>
