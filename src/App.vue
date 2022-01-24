@@ -6,8 +6,12 @@
       <a href="#">About Us</a>
       <a href="#">Contact</a>
     </nav>
-    <Home v-if="currentPage == 'home'" @changePage="toAddCard" v-bind:card="card"/>
-    <AddCard v-else-if="currentPage == 'addcard'" @send="showCard"/>
+    <Home v-if="currentPage == 'home'" @viewChange="toAddCard" v-bind:card="card" @changePage="changePage"/>
+    <AddCard v-else-if="currentPage == 'addcard'"  @viewChange="toAddCard"/>
+
+    <!-- <Home v-if="currentPage == 'home'" @changePage="toAddCard" v-bind:card="card"/>
+    <AddCard v-else-if="currentPage == 'addcard'" /> -->
+
   </div>
 </template>
 
@@ -24,25 +28,37 @@ export default {
     
   }},
   methods:{
-    toAddCard(){
+    changePage(){
       this.currentPage = 'addcard'
     },
-    showCard(card){
-      console.log('this is a app',card)
-      this.card = card
-      this.cards.push(this.card)
-      this.localStorage()
+
+
+
+    toAddCard(){
+      if(this.currentPage == 'home'){
+        this.currentPage = 'addcard'
+
+      }else{
+        this.currentPage = 'home'
+
+      }
     },
-    localStorage(){
-      localStorage.setItem('cards', JSON.stringify(this.cards))
-    }
-  },
-  beforeMount(){
-    const cards = localStorage.getItem('cards')
-    if(cards ){
-      this.cards = JSON.parse(cards)
-      console.log('this is saved cards', this.cards)
-    } 
+  //   showCard(card){
+  //     console.log('this is a app',card)
+  //     this.card = card
+  //     this.cards.push(this.card)
+  //     this.localStorage()
+  //   },
+  //   localStorage(){
+  //     localStorage.setItem('cards', JSON.stringify(this.cards))
+  //   }
+  // },
+  // beforeMount(){
+  //   const cards = localStorage.getItem('cards')
+  //   if(cards ){
+  //     this.cards = JSON.parse(cards)
+  //     console.log('this is saved cards', this.cards)
+  //   } 
   }
 
 

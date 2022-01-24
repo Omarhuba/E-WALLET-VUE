@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="$emit('clicked')">
     <article class="activ-card" 
              :card="card"
              v-bind:style="{backgroundColor: card.vendor.color }">

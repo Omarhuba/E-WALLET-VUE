@@ -10,7 +10,7 @@
           <br>
           <br>
           <div class="middle">
-           <CardForm  @send="send" />
+           <CardForm  @viewChange="$emit('viewChange')"/>
           </div>
       </main>
       <br>
@@ -33,10 +33,10 @@ export default {
         addCard(send){
       console.log(send)
     },
-    send(card){
-        console.log('this is add card component',card) 
-         this.$emit('send',{...card})
-    }
+    // send(card){
+    //     console.log('this is add card component',card) 
+    //      this.$emit('send',{...card})
+    // }
     }
 
 

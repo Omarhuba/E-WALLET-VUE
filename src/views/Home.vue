@@ -7,24 +7,24 @@
     <main>
         <div class="top-section">
           
-          <SingleCard v-if="card" v-bind:card="card"  />
+          <!-- <SingleCard v-if="card" v-bind:card="card"  /> -->
         </div>
         <div class="middle-section">
-            <CardList/> 
+            <CardList @viewChange="$emit('viewChange')"/> 
         </div>
     </main>
     <footer>
-        <button @click="toAddCard" class="addbtn">ADD A NEW CARD</button>
+        <!-- <button class="addbtn" @click="toAddCard">ADD A NEW CARD</button> -->
     </footer>
   </div>
 </template>
 
 <script>
-import SingleCard from "../components/SingleCard.vue";
+// import SingleCard from "../components/SingleCard.vue";
 import CardList from "../components/CardList.vue";
 export default {
   name: "Home",
-  components: { SingleCard , CardList},
+  components: {  CardList, },
   props: ['card'],
   data(){return{
 
@@ -41,14 +41,5 @@ export default {
 header{
     text-align: center;
 }
-.addbtn{
-    width: 350px;
-    height: 50px;
-    background-color: white;
-    border-radius: 10px;
-    font-family: "PT Mono", monospace;
-    font-size: 1.4rem;
-    font-weight: bold;
 
-}
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div>
      <SingleCard :card="card"
-                  @send="register"
+               
                   
                   />
      <br>
      <br>
 
 
-<form action="user-form" @submit.prevent="addCard">
+<form action="user-form" @submit.prevent="submit">
   <label for="card-number">CARD NUMBER</label>
   <input type="number" name="user-name" 
          placeholder="TYPE YOUR CARDNUMBER HERE"
@@ -23,12 +23,12 @@
   <div class="valid-ccv">
     <span class="valid">
       <label for="input">VALID THRU</label>
-      <input type="text" placeholder="YYYY/MM"
+      <input type="number" placeholder="YYYY/MM"
               v-model="card.valid"   >
     </span>
     <span class="ccv">
       <label for="input">CCV</label>
-      <input type="text" placeholder="CCV" v-model="card.ccv" >
+      <input type="number" placeholder="CCV" v-model="card.ccv" >
     </span>
   </div>
 <br>
@@ -41,7 +41,7 @@
 
 <br>
  <!-- <button class="addbtn">ADD A NEW CARD</button> -->
- <input class="submit" type="submit" value="ADD NEW CARD">
+ <input class="submit" @click="viewChange" type="submit" value="ADD NEW CARD">
 </form>
   </div>
 </template>
@@ -52,13 +52,15 @@ export default {
   name: 'cardform',
   components: {SingleCard},
   data(){return{
+    formData:[],
+    // cards: null ,
     card: {
       cardNumber: '',
       cardholderName: '',
       // month: '',
       valid: '',
       ccv: '',
-      vendor: ''
+      vendor: {}
     },
     vendors: [{
       name: 'BITCOIN CARD',
@@ -83,19 +85,33 @@ export default {
    
     ]
   }},
+  
   methods: {
-    addCard(){
-      console.log('add to card.....',this.card)
-      this.$emit('send',{...this.card})
+    // addCard(){
+    //   console.log('add to card.....',this.card)
+    //   // this.$emit('send',{...this.card})
+    // },
+    viewChange(){
+      this.$emit('viewChange');
     },
     register(formData){
       console.log(formData)
     },
-    // submit(){
-    //   console.log(this.card)
-    //   this.$emit('send',{...this.card})
-    // }
-  }
+    
+    submit(){
+      console.log('submit kann in te funka utan den',this.card)
+      // this.$emit('send',{...this.card})
+    },
+  },
+  beforeDestroy() {
+    if (localStorage.getItem("savedCards") != undefined) {
+      this.formData = JSON.parse(localStorage.getItem("savedCards"));
+    }
+      this.formData.push(this.card);
+      localStorage.setItem("savedCards", JSON.stringify(this.formData)); 
+  },
+
+
 }
 </script>
 
