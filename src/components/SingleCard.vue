@@ -10,7 +10,6 @@
       </div>
       <img class="chip" src="../assets/chip.svg" alt="" />
       <div class="middle" >
-        <!-- <p class="card-number">{{card.cardNumber}}</p> -->
         <span>{{ num1 }}</span>
         <span>{{ num2 }}</span>
         <span>{{ num3 }}</span>
@@ -27,8 +26,7 @@
         </div>
         <div>
           <p>VALID THRU</p>
-          <!-- <p class="valid">{{card.valid}}/{{card.valid}}</p> -->
-          <p class="valid">{{ valid1 }}/{{ valid2 }}</p>
+          <p class="valid">{{ cardYear }}/{{ cardMonth }}</p>
         </div>
       </div>
     </article>
@@ -95,28 +93,6 @@ export default {
       }
       return span;
     },
-    valid1() {
-      let p = "";
-      for (let i = 0; i < 4; i++) {
-        if (this.card.valid[i]) {
-          p += this.card.valid[i];
-        } else {
-          p += "X";
-        }
-      }
-      return p;
-    },
-    valid2() {
-      let p = "";
-      for (let i = 4; i < 6; i++) {
-        if (this.card.valid[i]) {
-          p += this.card.valid[i];
-        } else {
-          p += "X";
-        }
-      }
-      return p;
-    },
     cardStyle(){
       return{
         color: this.card.vendor.color,
@@ -132,7 +108,6 @@ export default {
       }
       return logo
     },
-
     wifiLogo(){
       let wifi= '';
       if(this.card.vendor.name == 'NINJA CARD'){
@@ -141,13 +116,25 @@ export default {
         wifi = this.wifi
       }
       return wifi
+    },
+    cardYear(){
+      let year = '';
+      if(this.card.year){
+        year = this.card.year 
+      }else{
+          year = 'XXXX'
     }
-    // bitcoin(){
-    //   let span = '';
-    //   if(this.card.vendor.name == 'BITCOIN CARD'){
-    //     span = 
-    //   }
-    // }
+    return year
+    },
+    cardMonth(){
+      let month = '';
+      if(this.card.month){
+        month = this.card.month 
+      }else{
+          month = 'XX'
+    }
+    return month
+    },
   },
 };
 </script>
@@ -160,14 +147,12 @@ export default {
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 5px 3px 11px -1px rgba(0, 0, 0, 0.84);
-//   color: 000;
   .top {
     display: flex;
     justify-content: space-between;
     margin: 15px 15px 0px 15px;
     .bitcoin {
       width: 50px;
-    //   display: none;
     }
   }
   .middle {
@@ -197,9 +182,6 @@ export default {
     border-radius: 5px;
     margin-left: 20px;
   }
-  // #wifiLogo{
-  //   color: white;
-  // }
   .card-number {
     font-size: 1.5rem;
     text-align: center;

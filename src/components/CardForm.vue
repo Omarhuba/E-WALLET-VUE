@@ -1,13 +1,9 @@
 <template>
   <div>
      <SingleCard :card="card"
-                 :vendors="vendors"
-                  
-                  />
+                 :vendors="vendors"/>
      <br>
      <br>
-
-
 <form action="user-form" @submit.prevent="submit">
   <label for="card-number">CARD NUMBER</label>
   <input type="number" name="user-name" 
@@ -20,20 +16,36 @@
          v-model="card.cardholderName"
          >
   <br>
-  <div class="valid-ccv">
-    <span class="valid">
-      <label for="input">VALID THRU</label>
-      <input type="number" placeholder="YYYY/MM"
-              v-model="card.valid"   >
+  <div class="valid-thru">
+    <span class="year">
+      <label for="year">YEAR</label>
+      <select name="year" v-model="card.year" class="cardYear">
+        <option value="" disabled selected hidden>YYYY</option>
+        <option v-for="year in year" :key="year" name="year">
+           {{year}} 
+        </option>
+      </select>
     </span>
-    <span class="ccv">
+    <span class="month">
+      <label for="month">MONTH</label>
+        <select name="month" v-model="card.month" class="cardMonth" aria-placeholder="YYYY">
+          <option value="" disabled selected hidden>MM</option>
+         <option v-for="month in month" :key="month" name="month">
+          {{month}}
+        </option>
+      </select>
+    </span>
+
+    <!-- <span class="ccv">
       <label for="input">MONTH</label>
-      <input type="number" placeholder="CCV" v-model="card.ccv" >
-    </span>
+      <input type="number" placeholder="MONTH" v-model="card.ccv" min="1" max="12">
+    </span> -->
+
   </div>
 <br>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
+    <option value="" disabled selected hidden>CHOISE YOUR CARD</option>
     <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor"  :value="vendor" v-bind:vendors="vendors">
       {{vendor.name}}
     </option>
@@ -57,7 +69,8 @@ export default {
     card: {
       cardNumber: '',
       cardholderName: '',
-      // month: '',
+      year: '',
+      month: '',
       valid: '',
       ccv: '',
       vendor: {}
@@ -85,7 +98,9 @@ export default {
       backgroundColor: '#F33355',
       color: 'white',
       logo: require('../assets/evil.svg')
-    }]
+    }],
+    year: ['2021','2022','2023','2024','2025','2026'],
+    month: ['01','02','03','04','05','06','07','08','09','10','11','12']
   }},
   
   methods: {
@@ -113,7 +128,6 @@ export default {
       localStorage.setItem("savedCards", JSON.stringify(this.formData)); 
   },
 
-
 }
 </script>
 
@@ -128,29 +142,27 @@ input{
   text-align: center;
   border-radius: 10px;
   font-size: 1.1rem;
-  
 }
-.valid-ccv{
+.valid-thru{
   display: flex;
-}
-.valid{
-  margin-right: 3px;
-  input{
-    flex-direction: row;
-    display: flex;
+  width: 250px;
+  .year select{
     width: 170px;
     height: 40px;
-    
+    margin-right: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: "PT Mono", monospace;
   }
-}  
-.ccv{
-  margin-left: 3px;
-  input{
-    flex-direction: row;
-    display: flex;
+  .month select{
     width: 170px;
     height: 40px;
-    
+    margin-left: 3px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: "PT Mono", monospace;
   }
 }
 .vendor{
@@ -159,6 +171,7 @@ input{
   text-align: center;
   border-radius: 10px;
   font-size: 1.1rem;
+  font-family: "PT Mono", monospace;
 }
 .submit{
   font-weight: 900;
@@ -167,5 +180,6 @@ input{
   width: 360px;
   height: 60px;
   border: none;
+  font-family: "PT Mono", monospace;
 }
 </style>

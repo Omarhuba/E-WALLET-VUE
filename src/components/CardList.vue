@@ -1,6 +1,5 @@
 <template>
   <div>
-      <!-- <h1>this is card list</h1> -->
       <SingleCard v-if="!formData" :card="card" class="single-card"/>
       <SingleCard   @clicked="changeActiv(index)"
                     :card="card"
@@ -10,7 +9,6 @@
                     />
             <button class="addbtn" v-if="!formData" @click="$emit('viewChange')">ADD A NEW CARD</button>
             <button class="full-addbtn" v-else @click="$emit('viewChange')">ADD A NEW CARD</button>
-
   </div>
 </template>
 
@@ -27,10 +25,11 @@ export default {
     card: {
       cardNumber: '',
       cardholderName: '',
-      // month: '',
+      year: '',
+      month: '',
       valid: '',
       ccv: '',
-      vendor: ''
+      vendor: {}
     },
   }},
   methods: {
@@ -48,7 +47,7 @@ export default {
 <style scoped lang="scss">
  .addbtn{
     width: 350px;
-    height: 80px;
+    height: 60px;
     background-color: white;
     border-radius: 10px;
     font-family: "PT Mono", monospace;
@@ -59,18 +58,17 @@ export default {
 }
 .full-addbtn{
   width: 350px;
-    height: 80px;
-    background-color: white;
-    border-radius: 10px;
-    font-family: "PT Mono", monospace;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-top: 450px;               
+  height: 60px;
+  background-color: white;
+  border-radius: 10px;
+  font-family: "PT Mono", monospace;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 450px;               
 }
 
 .grupp-card:nth-child(1){
   position: relative;
-  // transform: translateY(-50%);
 }
 .grupp-card:nth-child(2){
   position: absolute;

@@ -8,10 +8,6 @@
     </nav>
     <Home v-if="currentPage == 'home'" @viewChange="toAddCard" v-bind:card="card" @changePage="changePage"/>
     <AddCard v-else-if="currentPage == 'addcard'"  @viewChange="toAddCard"/>
-
-    <!-- <Home v-if="currentPage == 'home'" @changePage="toAddCard" v-bind:card="card"/>
-    <AddCard v-else-if="currentPage == 'addcard'" /> -->
-
   </div>
 </template>
 
@@ -24,23 +20,18 @@ export default {
     currentPage: 'home',
     card:null,
     cards: [],
-     
-    
   }},
+
   methods:{
     changePage(){
       this.currentPage = 'addcard'
     },
 
-
-
     toAddCard(){
       if(this.currentPage == 'home'){
         this.currentPage = 'addcard'
-
       }else{
         this.currentPage = 'home'
-
       }
     },
   //   showCard(card){
@@ -60,8 +51,6 @@ export default {
   //     console.log('this is saved cards', this.cards)
   //   } 
   }
-
-
 }
 </script>
 
@@ -71,32 +60,29 @@ export default {
   font-family: "PT Mono", monospace;
 }
 #app{
-    width: 450px;
-    height: 950px;
-    background-color: yellowgreen;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    // text-align: center;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 0px #000000
-;
+  width: 450px;
+  height: 950px;
+  background-color: yellowgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  // text-align: center;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 0px #000000;
 
-;
 }
-  .navbar{
-    margin: 20px;
-    a{
-      margin: 10px;
-      text-decoration: none;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 800;
-      &:hover{
-        color: chocolate;
-      }
-      
+.navbar{
+  margin: 20px;
+   a{
+     margin: 10px;
+     text-decoration: none;
+     color: white;
+     font-size: 1.2rem;
+     font-weight: 800;
+     &:hover{
+      color: chocolate;
     }
   }
+}
 </style>

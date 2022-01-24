@@ -8,13 +8,10 @@
           <div class="top">
           </div>
           <br>
-          <br>
           <div class="middle">
            <CardForm  @viewChange="$emit('viewChange')"/>
           </div>
       </main>
-      <br>
-      <br>
       <footer>
       </footer>
   </div>
@@ -38,9 +35,6 @@ export default {
     //      this.$emit('send',{...card})
     // }
     }
-
-
-
 }
 </script>
 
@@ -54,7 +48,7 @@ header{
          width: 200px;
         text-align: center;
         margin: auto;
+        font-family: "PT Mono", monospace;
     }
-
 }    
 </style>
