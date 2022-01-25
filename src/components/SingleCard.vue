@@ -19,9 +19,7 @@
         <div>
           <p>CARDHOLDER NAME</p>
           <p class="cardName">
-            {{
-              card.cardholderName ? card.cardholderName : "FIRSTNAME LASTMANE"
-            }}
+            {{ fullname }}
           </p>
         </div>
         <div>
@@ -40,6 +38,12 @@ export default {
     vendorLogo: require('../assets/bitcoin.svg'),
     wifiWhite: require('../assets/wifi_white.svg'),
     wifi: require('../assets/wifi.svg'),
+    data : {
+      firstName: 'FIRSTNAME',
+      lastName: 'LASTNAME',
+      fullName: '',
+    }
+
 
   }},
 //   mounted(){
@@ -49,49 +53,59 @@ export default {
     
   },
   computed: {
+   
+    fullname(){
+      let fullname = '';
+      if(this.card.cardholderName ){
+         fullname = this.card.cardholderName 
+      }else{
+        fullname = 'FIRSTNAME LASTNAME'
+      }
+      return fullname
+    },
     num1() {
-      let span = "";
+      let num1 = "";
       for (let i = 0; i < 4; i++) {
         if (this.card.cardNumber[i]) {
-          span += this.card.cardNumber[i];
+          num1 += this.card.cardNumber[i];
         } else {
-          span += "X";
+          num1 += "X";
         }
       }
-      return span;
+      return num1;
     },
     num2() {
-      let span = "";
+      let num2 = "";
       for (let i = 4; i < 8; i++) {
         if (this.card.cardNumber[i]) {
-          span += this.card.cardNumber[i];
+          num2 += this.card.cardNumber[i];
         } else {
-          span += "X";
+          num2 += "X";
         }
       }
-      return span;
+      return num2;
     },
     num3() {
-      let span = "";
+      let num3 = "";
       for (let i = 8; i < 12; i++) {
         if (this.card.cardNumber[i]) {
-          span += this.card.cardNumber[i];
+          num3 += this.card.cardNumber[i];
         } else {
-          span += "X";
+          num3 += "X";
         }
       }
-      return span;
+      return num3;
     },
     num4() {
-      let span = "";
+      let num4 = "";
       for (let i = 12; i < 16; i++) {
         if (this.card.cardNumber[i]) {
-          span += this.card.cardNumber[i];
+          num4 += this.card.cardNumber[i];
         } else {
-          span += "X";
+          num4 += "X";
         }
       }
-      return span;
+      return num4;
     },
     cardStyle(){
       return{

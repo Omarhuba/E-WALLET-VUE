@@ -21,16 +21,16 @@
       <label for="year">YEAR</label>
       <select name="year" v-model="card.year" class="cardYear">
         <option value="" disabled selected hidden>YYYY</option>
-        <option v-for="year in year" :key="year" name="year">
+        <option v-for="year in years" :key="year" name="year">
            {{year}} 
         </option>
       </select>
     </span>
     <span class="month">
       <label for="month">MONTH</label>
-        <select name="month" v-model="card.month" class="cardMonth" aria-placeholder="YYYY">
+        <select name="month" v-model="card.month" class="cardMonth" >
           <option value="" disabled selected hidden>MM</option>
-         <option v-for="month in month" :key="month" name="month">
+         <option v-for="month in months" :key="month" name="month">
           {{month}}
         </option>
       </select>
@@ -45,7 +45,7 @@
 <br>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
-    <option value="" disabled selected hidden>CHOISE YOUR CARD</option>
+     <option value=""  selected hidden>CHOISE YOUR CARD</option>
     <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor"  :value="vendor" v-bind:vendors="vendors">
       {{vendor.name}}
     </option>
@@ -99,8 +99,8 @@ export default {
       color: 'white',
       logo: require('../assets/evil.svg')
     }],
-    year: ['2021','2022','2023','2024','2025','2026'],
-    month: ['01','02','03','04','05','06','07','08','09','10','11','12']
+    years: ['2021','2022','2023','2024','2025','2026'],
+    months: ['01','02','03','04','05','06','07','08','09','10','11','12']
   }},
   
   methods: {
@@ -140,8 +140,15 @@ input{
   width: 350px;
   height: 40px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 1.1rem;
+  border: 1px rgb(20, 196, 250);
+  border-color: rgb(83, 158, 151);
+  // color: white;
+  &:hover{
+    background-color: rgb(83, 158, 151);
+    transition: 0.5s;
+  }
 }
 .valid-thru{
   display: flex;
@@ -150,28 +157,49 @@ input{
     width: 170px;
     height: 40px;
     margin-right: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
     font-size: 1.1rem;
     font-family: "PT Mono", monospace;
+    border: 1px rgb(20, 196, 250);
+    border-color: rgb(83, 158, 151);
+    // color: white;
+    &:hover{
+      background-color: rgb(83, 158, 151);
+      transition: 0.5s;
+  }
   }
   .month select{
     width: 170px;
     height: 40px;
     margin-left: 3px;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
     font-size: 1.1rem;
     font-family: "PT Mono", monospace;
+    border: 1px rgb(20, 196, 250);
+    border-color: rgb(83, 158, 151);
+    // color: white;
+    &:hover{
+      background-color: rgb(83, 158, 151);
+      transition: 0.5s;
+  }
   }
 }
 .vendor{
   width: 360px;
   height: 40px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 20px;
   font-size: 1.1rem;
   font-family: "PT Mono", monospace;
+  border: 1px rgb(20, 196, 250);
+  border-color: rgb(83, 158, 151);
+  // color: white;
+  &:hover{
+    background-color: rgb(83, 158, 151);
+    transition: 0.5s;
+  }
 }
 .submit{
   font-weight: 900;
