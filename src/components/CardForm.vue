@@ -4,17 +4,22 @@
                  :vendors="vendors"/>
      <br>
      <br>
-<form action="user-form" @submit.prevent="submit">
+<form  @submit.prevent="submit">
   <label for="card-number">CARD NUMBER</label>
   <input type="number" name="user-name" 
-         placeholder="TYPE YOUR CARDNUMBER HERE"
+         placeholder="TYPE YOUR CARDNUMBER HERE" min="1" 
+         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+         pattern="\d*" maxlength="16"
          v-model="card.cardNumber"
          >
+         <span class="validity"></span>
   <br>
   <label for="card-name">CARDHOLDER NAME</label>
-  <input type="text" name="user-name" placeholder="TYPE YOUR NAME HERE"
-         v-model="card.cardholderName"
-         >
+  <input type="text" name="user-name" required size="45"
+         placeholder="TYPE YOUR NAME HERE"
+         pattern="[a-z]{4,8}"
+         v-model="card.cardholderName">
+         <span class="validity"></span>
   <br>
   <div class="valid-thru">
     <span class="year">
@@ -104,6 +109,10 @@ export default {
   }},
   
   methods: {
+    // oninput(object){
+    //   if (this.value.length > this.maxLength)
+    //   this.value = this.value.slice(0, this.maxLength);
+    // },
     // addCard(){
     //   console.log('add to card.....',this.card)
     //   // this.$emit('send',{...this.card})
