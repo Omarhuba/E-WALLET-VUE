@@ -166,7 +166,7 @@ export default {
     justify-content: space-between;
     margin: 15px 15px 0px 15px;
     .bitcoin {
-      width: 50px;
+      width: 60px;
     }
   }
   .middle {

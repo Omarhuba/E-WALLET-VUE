@@ -54,6 +54,7 @@ export default {
     font-size: 1.4rem;
     font-weight: bold;
     margin-top: 50px;
+  position: fixed;
 
 }
 .full-addbtn{

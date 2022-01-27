@@ -61,7 +61,7 @@ export default {
 }
 #app{
   width: 450px;
-  height: 950px;
+  height: 1000px;
   background-color: yellowgreen;
   display: flex;
   flex-direction: column;

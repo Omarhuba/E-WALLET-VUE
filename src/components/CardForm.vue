@@ -1,23 +1,28 @@
 <template>
   <div>
-     <SingleCard :card="card"
-                 :vendors="vendors"/>
+     <SingleCard :card="card"  :vendors="vendors"/>
      <br>
      <br>
-<form  @submit.prevent="submit">
+<form  @submit.prevent="validate">
+  <p v-if="error.length" class="error-text">
+    <b>SHOLD BE TYPE YOUR INFO</b>
+   <ul>
+      <li v-for="e in error" :key="e.id">{{e}}</li>
+   </ul>
+  </p>
   <label for="card-number">CARD NUMBER</label>
-  <input type="number" name="user-name" 
-         placeholder="TYPE YOUR CARDNUMBER HERE" min="1" 
-         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-         pattern="\d*" maxlength="16"
+  <input type="text" name="user-name" 
+         placeholder="TYPE YOUR CARDNUMBER HERE" 
+         onkeypress="return /[0-9, Enter]/i.test(event.key)" minlength="16" maxlength="16"
+         pattern="\d*" 
          v-model="card.cardNumber"
          >
          <span class="validity"></span>
   <br>
   <label for="card-name">CARDHOLDER NAME</label>
-  <input type="text" name="user-name" required size="45"
+  <input type="text" name="user-name" onkeypress="return /[a-ö, ' ', Enter]/i.test(event.key)" maxlength="20"
          placeholder="TYPE YOUR NAME HERE"
-         pattern="[a-z]{4,8}"
+         
          v-model="card.cardholderName">
          <span class="validity"></span>
   <br>
@@ -50,15 +55,14 @@
 <br>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
-     <option value=""  selected hidden>CHOISE YOUR CARD</option>
+     <option :value="{}" disabled selected hidden>CHOISE YOUR CARD</option>
     <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor"  :value="vendor" v-bind:vendors="vendors">
       {{vendor.name}}
     </option>
   </select>
-
 <br>
  <!-- <button class="addbtn">ADD A NEW CARD</button> -->
- <input class="submit" @click="viewChange" type="submit" value="ADD NEW CARD">
+ <input class="submit"  type="submit" value="ADD NEW CARD">
 </form>
   </div>
 </template>
@@ -70,7 +74,8 @@ export default {
   components: {SingleCard},
   data(){return{
     formData:[],
-    // cards: null ,
+    error: [],
+
     card: {
       cardNumber: '',
       cardholderName: '',
@@ -109,6 +114,39 @@ export default {
   }},
   
   methods: {
+    validate(e){
+     if(
+       this.card.cardNumber  &&
+       this.card.cardholderName  &&
+       this.card.year  &&
+       this.card.month &&  
+       this.card.vendor  
+     ){
+       console.log('hello to error')
+     }
+       this.error =[];
+      if(!this.card.cardNumber.length ){
+        this.error.push('Type Your Card Number')
+      }
+      if(!this.card.cardholderName.length ){
+        this.error.push('Type Your Card HolderName')
+      }
+      if(!this.card.year.length ){
+        this.error.push('Type Your Card Year')
+      }
+      if(!this.card.month.length ){
+        this.error.push('Type Your Card Month')
+      }
+      if(!Object.keys(this.card.vendor) ){
+        this.error.push('Choise Your Card vendor')
+      }
+        console.warn('error', this.error)
+       e.preventDefault()
+       if(!this.error.length){
+         this.$emit('viewChange');
+
+       }
+    },
     // oninput(object){
     //   if (this.value.length > this.maxLength)
     //   this.value = this.value.slice(0, this.maxLength);
@@ -124,15 +162,18 @@ export default {
       console.log(formData)
     },
     
-    submit(){
-      console.log('submit kann in te funka utan den',this.card)
-      // this.$emit('send',{...this.card})
-    },
+    // submit(){
+    //   this.submit = []
+    //   console.log('submit kann in te funka utan den',this.card)
+
+   
+    // },
   },
   beforeDestroy() {
     if (localStorage.getItem("savedCards") != undefined) {
       this.formData = JSON.parse(localStorage.getItem("savedCards"));
     }
+    
       this.formData.push(this.card);
       localStorage.setItem("savedCards", JSON.stringify(this.formData)); 
   },
@@ -218,5 +259,19 @@ input{
   height: 60px;
   border: none;
   font-family: "PT Mono", monospace;
+}
+.error-text{
+  color: red;
+  text-align: center;
+  font-family: "PT Mono", monospace;
+ ul {
+  list-style: none;
+}
+ul li::before {
+  content: "😩 👉";
+  size: 1rem;
+  display: inline-block;
+  margin-right: 0.2rem;
+}
 }
 </style>
