@@ -7,13 +7,10 @@
       <main>
           <div class="top">
           </div>
-          <br>
           <div class="middle">
            <CardForm  @viewChange="$emit('viewChange')"/>
           </div>
       </main>
-      <footer>
-      </footer>
   </div>
 </template>
 

@@ -27,6 +27,12 @@
           <p class="valid">{{ cardYear }}/{{ cardMonth }}</p>
         </div>
       </div>
+      <!-- <button class="delete" v-if="deleteBtn"
+              @click="$emit('deletCard')">
+              DELETE CARD
+        <img src="../assets/delete.svg"/>
+
+        </button> -->
     </article>
   </div>
 </template>
@@ -38,13 +44,12 @@ export default {
     vendorLogo: require('../assets/bitcoin.svg'),
     wifiWhite: require('../assets/wifi_white.svg'),
     wifi: require('../assets/wifi.svg'),
+    deleteBtn : true,
     data : {
       firstName: 'FIRSTNAME',
       lastName: 'LASTNAME',
       fullName: '',
     }
-
-
   }},
 //   mounted(){
 //       console.log(this.card, this.vendors)
@@ -202,5 +207,6 @@ export default {
     margin: 5px;
     font-family: "PT Mono", monospace;
   }
+
 }
 </style>

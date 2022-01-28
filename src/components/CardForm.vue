@@ -1,8 +1,6 @@
 <template>
   <div>
-     <SingleCard :card="card"  :vendors="vendors"/>
-     <br>
-     <br>
+     <SingleCard :card="card"  :vendors="vendors" class="singleCard"/>
 <form  @submit.prevent="validate">
   <p v-if="error.length" class="error-text">
     <b>SHOLD BE TYPE YOUR INFO</b>
@@ -15,17 +13,12 @@
          placeholder="TYPE YOUR CARDNUMBER HERE" 
          onkeypress="return /[0-9, Enter]/i.test(event.key)" minlength="16" maxlength="16"
          pattern="\d*" 
-         v-model="card.cardNumber"
-         >
-         <span class="validity"></span>
-  <br>
+         v-model="card.cardNumber">
   <label for="card-name">CARDHOLDER NAME</label>
   <input type="text" name="user-name" onkeypress="return /[a-ö, ' ', Enter]/i.test(event.key)" maxlength="20"
          placeholder="TYPE YOUR NAME HERE"
-         
          v-model="card.cardholderName">
          <span class="validity"></span>
-  <br>
   <div class="valid-thru">
     <span class="year">
       <label for="year">YEAR</label>
@@ -45,14 +38,7 @@
         </option>
       </select>
     </span>
-
-    <!-- <span class="ccv">
-      <label for="input">MONTH</label>
-      <input type="number" placeholder="MONTH" v-model="card.ccv" min="1" max="12">
-    </span> -->
-
   </div>
-<br>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
      <option :value="{}" disabled selected hidden>CHOISE YOUR CARD</option>
@@ -60,8 +46,6 @@
       {{vendor.name}}
     </option>
   </select>
-<br>
- <!-- <button class="addbtn">ADD A NEW CARD</button> -->
  <input class="submit"  type="submit" value="ADD NEW CARD">
 </form>
   </div>
@@ -75,7 +59,6 @@ export default {
   data(){return{
     formData:[],
     error: [],
-
     card: {
       cardNumber: '',
       cardholderName: '',
@@ -144,40 +127,22 @@ export default {
        e.preventDefault()
        if(!this.error.length){
          this.$emit('viewChange');
-
        }
     },
-    // oninput(object){
-    //   if (this.value.length > this.maxLength)
-    //   this.value = this.value.slice(0, this.maxLength);
-    // },
-    // addCard(){
-    //   console.log('add to card.....',this.card)
-    //   // this.$emit('send',{...this.card})
-    // },
     viewChange(){
       this.$emit('viewChange');
     },
     register(formData){
       console.log(formData)
     },
-    
-    // submit(){
-    //   this.submit = []
-    //   console.log('submit kann in te funka utan den',this.card)
-
-   
-    // },
   },
   beforeDestroy() {
     if (localStorage.getItem("savedCards") != undefined) {
       this.formData = JSON.parse(localStorage.getItem("savedCards"));
     }
-    
       this.formData.push(this.card);
       localStorage.setItem("savedCards", JSON.stringify(this.formData)); 
   },
-
 }
 </script>
 
@@ -185,6 +150,9 @@ export default {
 form{
   display: flex;
   flex-direction: column;
+}
+.singleCard{
+  margin-bottom: 30px;
 }
 input{
   width: 350px;
@@ -194,7 +162,7 @@ input{
   font-size: 1.1rem;
   border: 1px rgb(20, 196, 250);
   border-color: rgb(83, 158, 151);
-  // color: white;
+    margin-bottom: 20px;
   &:hover{
     background-color: rgb(83, 158, 151);
     transition: 0.5s;
@@ -203,6 +171,7 @@ input{
 .valid-thru{
   display: flex;
   width: 250px;
+  margin-bottom: 20px;
   .year select{
     width: 170px;
     height: 40px;
@@ -245,7 +214,7 @@ input{
   font-family: "PT Mono", monospace;
   border: 1px rgb(20, 196, 250);
   border-color: rgb(83, 158, 151);
-  // color: white;
+  margin-bottom: 20px;
   &:hover{
     background-color: rgb(83, 158, 151);
     transition: 0.5s;

@@ -6,7 +6,7 @@
       <a href="#">About Us</a>
       <a href="#">Contact</a>
     </nav>
-    <Home v-if="currentPage == 'home'" @viewChange="toAddCard" v-bind:card="card" @changePage="changePage"/>
+    <Home v-if="currentPage == 'home'" @viewChange="toAddCard" v-bind:card="card" @changePage="changePage" @deletCard="showDelete"/>
     <AddCard v-else-if="currentPage == 'addcard'"  @viewChange="toAddCard"/>
   </div>
 </template>
@@ -22,9 +22,10 @@ export default {
     cards: [],
   }},
 
-  methods:{
+methods:{
     changePage(){
       this.currentPage = 'addcard'
+      console.log('asdasdasdasaaa')
     },
 
     toAddCard(){
@@ -34,6 +35,10 @@ export default {
         this.currentPage = 'home'
       }
     },
+    showDelete(){
+
+      console.log('this delete button works')
+    }
   //   showCard(card){
   //     console.log('this is a app',card)
   //     this.card = card
@@ -70,7 +75,6 @@ export default {
   // text-align: center;
   border-radius: 10px;
   box-shadow: 5px 5px 5px 0px #000000;
-
 }
 .navbar{
   margin: 20px;

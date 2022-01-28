@@ -6,10 +6,10 @@
     </header>
     <main>
         <div class="top-section">
-          <!-- <SingleCard v-if="card" v-bind:card="card"  /> -->
         </div>
         <div class="middle-section">
-            <CardList @viewChange="$emit('viewChange')"/> 
+            <CardList @viewChange="$emit('viewChange')"
+                      @deletCard="$emit('deletCard')"/> 
         </div>
     </main>
   </div>
@@ -22,7 +22,6 @@ export default {
   components: {  CardList, },
   props: ['card'],
   data(){return{
-
   }},
   methods: {
       toAddCard(){
@@ -37,5 +36,4 @@ header{
   text-align: center;
   font-family: "PT Mono", monospace;
 }
-
 </style>
