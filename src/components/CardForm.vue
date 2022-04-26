@@ -5,14 +5,16 @@
   <p v-if="error.length" class="error-text">
     <b>SHOLD BE TYPE YOUR INFO</b>
    <ul>
-      <li v-for="e in error" :key="e.id">{{e}}</li>
+      <li v-for="e in error" :key="e.id">
+        {{e}}
+      </li>
    </ul>
   </p>
   <label for="card-number">CARD NUMBER</label>
-  <input type="text" name="user-name" 
-         placeholder="TYPE YOUR CARDNUMBER HERE" 
+  <input type="text" name="user-name"
+         placeholder="TYPE YOUR CARDNUMBER HERE"
          onkeypress="return /[0-9, Enter]/i.test(event.key)" minlength="16" maxlength="16"
-         pattern="\d*" 
+         pattern="\d*"
          v-model="card.cardNumber">
   <label for="card-name">CARDHOLDER NAME</label>
   <input type="text" name="user-name" onkeypress="return /[a-ö, ' ', Enter]/i.test(event.key)" maxlength="20"
@@ -25,7 +27,7 @@
       <select name="year" v-model="card.year" class="cardYear">
         <option value="" disabled selected hidden>YYYY</option>
         <option v-for="year in years" :key="year" name="year">
-           {{year}} 
+           {{year}}
         </option>
       </select>
     </span>
@@ -41,7 +43,7 @@
   </div>
   <label for="vendor">VENDOR</label>
   <select class="vendor" name="vendor" id="vendor" v-model="card.vendor">
-     <option :value="{}" disabled selected hidden>CHOISE YOUR CARD</option>
+     <option :value="''" disabled selected hidden>CHOISE YOUR CARD</option>
     <option v-for="vendor in vendors" :key="vendor.vendor" name="vendor"  :value="vendor" v-bind:vendors="vendors">
       {{vendor.name}}
     </option>
@@ -66,7 +68,7 @@ export default {
       month: '',
       valid: '',
       ccv: '',
-      vendor: {}
+      vendor: ""
     },
     vendors: [{
       name: 'BITCOIN CARD',
@@ -95,15 +97,15 @@ export default {
     years: ['2021','2022','2023','2024','2025','2026'],
     months: ['01','02','03','04','05','06','07','08','09','10','11','12']
   }},
-  
+
   methods: {
     validate(e){
      if(
        this.card.cardNumber  &&
        this.card.cardholderName  &&
        this.card.year  &&
-       this.card.month &&  
-       this.card.vendor  
+       this.card.month &&
+       this.card.vendor
      ){
        console.log('hello to error')
      }
@@ -120,7 +122,7 @@ export default {
       if(!this.card.month.length ){
         this.error.push('Type Your Card Month')
       }
-      if(!Object.keys(this.card.vendor) ){
+      if(!this.card.vendor ){
         this.error.push('Choise Your Card vendor')
       }
         console.warn('error', this.error)
@@ -141,7 +143,7 @@ export default {
       this.formData = JSON.parse(localStorage.getItem("savedCards"));
     }
       this.formData.push(this.card);
-      localStorage.setItem("savedCards", JSON.stringify(this.formData)); 
+      localStorage.setItem("savedCards", JSON.stringify(this.formData));
   },
 }
 </script>

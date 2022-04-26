@@ -1,12 +1,22 @@
 <template>
   <div>
       <SingleCard v-if="!formData" :card="card" class="single-card"/>
+
       <SingleCard   @clicked="changeActiv(index)"
                     :card="card"
                     v-else
                     v-for="(card,index) in formData" :key="card.index"
                     class="grupp-card"
                     @deletCard="$emit('deletCard')"/>
+
+            <!-- <button class="delete" 
+            v-if="formData"
+              @click="removeCard">
+              DELETE CARD
+        <img src="../assets/delete.svg"/>
+
+        </button> -->
+
             <button class="addbtn" v-if="!formData" @click="$emit('viewChange')">ADD A NEW CARD</button>
             <button class="full-addbtn" v-else @click="$emit('viewChange')">ADD A NEW CARD</button>
   </div>
@@ -21,6 +31,7 @@ export default {
   },
   data(){return{
     formData: [],
+    // avtivCardIndex : 0,
     card: {
       cardNumber: '',
       cardholderName: '',
@@ -38,6 +49,11 @@ export default {
         this.formData.splice(index,1)
         this.formData.unshift(newActiv)
       }
+    //   this.avtivCardIndex = index
+    // },
+    // removeCard(){
+    //    this.formData.splice(this.avtivCardIndex,1)
+    //    localStorage.setItem('savedCards', JSON.stringify(this.formData))
     }
   }
 }
